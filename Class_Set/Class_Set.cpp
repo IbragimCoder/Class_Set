@@ -185,6 +185,24 @@ public:
 		insert(mySet.root, newNode);
 	}
 
+	bool contains(int x)
+	{
+		if (x == mySet.root->val)
+		{
+			return true;
+		}
+		for (const auto& t : mySet.arr)
+		{
+			if (t->val == x)
+			{
+				return true;
+			}
+		}
+
+		insert_set(x);
+		return false;
+	}
+
 };
 
 int main()
