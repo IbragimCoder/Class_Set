@@ -156,7 +156,36 @@ public:
 
 };
 
+class Set :public RBTree
+{
+private:
+	RBTree mySet;
 
+public:
+	Set(int y, int* tempArr) : RBTree(y)
+	{
+		mySet.root = new Node(y);
+		mySet.arr.push_back(mySet.root);
+
+		for (int i = 0; i < 3; i++)
+		{
+			Node* newNode = new Node(tempArr[i]);
+
+			mySet.arr.push_back(newNode);
+			insert_set(tempArr[i]);
+		}
+	}
+
+
+	void insert_set(int tmp)
+	{
+		Node* newNode = new Node(tmp);
+
+		mySet.arr.push_back(newNode);
+		insert(mySet.root, newNode);
+	}
+
+};
 
 int main()
 {
