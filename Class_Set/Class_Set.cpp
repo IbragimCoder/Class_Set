@@ -203,6 +203,17 @@ public:
 		return false;
 	}
 
+	void displaySet()
+	{
+		if (mySet.root == NULL)
+		{
+			std::cout << "Set is empty!" << "\n";
+			return;
+		}
+
+		display(mySet.root);
+	}
+
 };
 
 int main()
