@@ -214,6 +214,11 @@ public:
 		display(mySet.root);
 	}
 
+	void Delete()
+	{
+
+	}
+
 };
 
 int main()
