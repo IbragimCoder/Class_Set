@@ -70,6 +70,117 @@ public:
 
 	}
 
+	void deleteCase1(Node* n)
+	{
+		if (n!= root)
+		{
+			deleteCase2(n);
+		}
+	}
+
+	void deleteCase2(Node* n)
+	{
+		Node* s = sibling(n);
+		Node* p = parent(n);
+		if (s->isRed == true)
+		{
+			p->isRed = true;
+			s->isRed = false;
+			if (n == p->left)
+			{
+				rotateLeft(p);
+			}
+			else
+			{
+				rotateRight(p);
+			}
+		}
+		deleteCase3(n);
+	}
+
+	void deleteCase4(Node* n)
+	{
+		Node* s = sibling(n);
+		Node* p = parent(n);
+		if (p->isRed == true && s->isRed == false && s->left ->isRed == false && s->right->isRed == false)
+		{
+			s->isRed = true;
+			p->isRed = false;
+		}
+		else {
+			deleteCase5(n);
+		}
+	}
+
+	void deleteCase3(Node* n)
+	{
+		Node* s = sibling(n);
+		Node* p = parent(n);
+		if (p->isRed == false && s->isRed == false && s->left->isRed == false && s->right->isRed = false)
+		{
+			s->isRed = true;
+			deleteCase1(n);
+
+		}
+		else {
+			deleteCase4(n);
+		}
+	}
+
+	Node* sibling(Node* n)
+	{
+		Node* p = parent(n);
+		if (n == p->left)
+		{
+			return p->left;
+		}
+		else
+		{
+			return p->left;
+		}
+	}
+
+	void deleteCase5(Node* n)
+	{
+		Node* s = sibling(n);
+		Node* p = parent(n);
+		if (s->isRed == false)
+		{
+			if (n == p->left && s->right->isRed == false && s->left->isRed == true)
+			{
+				s->isRed = true;
+				s->left->left = false;
+				rotateRight(s);
+			}
+			else if(n == p->right && s->left->isRed == false && s->right ->isRed == true)
+			{
+				s->isRed == true;
+				s->right->isRed = false;
+				rotateLeft(s);
+			}
+		}
+		deleteCase6(n);
+	}
+
+	void deleteCase6(Node* n)
+	{
+		Node* p = parent(n);
+		Node* s = sibling(n);
+		s->isRed = p->isRed;
+		p->isRed = false;
+		if (n==p->left)
+		{
+			s->right->isRed = false;
+			rotateLeft(p);
+
+		}
+		else
+		{
+			s->left->isRed = false;
+			rotateRight(p);
+		}
+	}
+
 	void rotateRight(Node*& node)// перевернуть направо
 	{
 		Node* temp = node->left;
